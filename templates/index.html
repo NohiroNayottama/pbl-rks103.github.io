@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">    
+    <title>Caesar Cipher Cryptography Application</title>
+
+    <style>
+        body {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans";
+            transition: background-image 1s; /* Efek transisi perubahan gambar latar belakang */
+        }
+    
+        body::before {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        input[type="file"] {
+            color: rgb(255, 255, 255); /* Warna teks tombol */
+            
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="header">
+            <div class="logo">
+                Cryptography
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href='#enc-dec'>Encrypt/Decrypt</a></li>
+                    <li><a href='#bruteforce'>Brute Force</a></li>
+                    <li><a href='#about-us'>About us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Caesar Cipher Cryptography Application</h1>
+        <div class="container">
+            <div class="column" id="enc-dec">
+                <form method="POST" action="/process" enctype="multipart/form-data" onsubmit="return validateKey()">
+                    <div class="centered-container">
+                        <h2>Encrypt / Decrypt</h2>
+                        <input type="file" name="uploaded_file" accept=".txt">
+                        <button type="submit" name="action" value="upload">Upload File</button>
+                        <label for="plain_text">Text</label>
+                        <textarea name="text" id="text" rows="4" cols="50" placeholder="Input text to encrypt or decrypt">{{ text }}</textarea>
+                        <label for="key">Key</label>
+                        <div class="key-input">
+                            <input type="number" name="key" id="key" value="0" style="width: 50px; height: 20px; font-size: 14px;">
+                            <button type="button" id="generate-key">Generate Key</button>
+                        </div>
+                        <button type="submit" name="action" value="encrypt">Encrypt</button>
+                        <button type="submit" name="action" value="decrypt">Decrypt</button>
+                        <h3>Result</h3>
+                        <textarea name="result_text" id="result_text" rows="4" cols="50" readonly placeholder="The result will appear here.">{{ result_text }}</textarea>
+                        <button class="download-link" id="download-button" onclick="downloadResult()" style="color: white;">Download Result</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column" id="bruteforce">
+                <form method="POST" action="/bruteforce">
+                    <div class="centered-container">
+                        <h2>Brute Force</h2>
+                        <label for="cipher_text">Cipher Text</label>
+                        <textarea name="cipher_text" id="bruteforce-cipher-text" rows="4" cols="50" placeholder="Input text to brute force">{{ cipher_text }}</textarea>
+
+                        <button type="submit">Brute Force</button>
+                        
+                        <h3>Brute Force Result</h3>
+                        <ul>
+                            {% if brute_force_results %}
+                                {% for key, result in brute_force_results.items() %}
+                                    <li><strong>Key {{ key }}:</strong> {{ result }}</li>
+                                {% endfor %}
+                            {% else %}
+                                <li>Enter the cipher text to view the Brute Force results.</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column" id="about-us">
+                <h2>About Us</h2>
+                <h3>PBL-RKS103</h3>
+                <div class="about-us-row">
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/happy-businessman-standing-smiling-against-orange_155003-13324.jpg?w=1060&t=st=1697368448~exp=1697369048~hmac=c9ee229ddc5dbae5f6413e24042367f77a7ff9334590fc89a8553d5fb8df2800" alt="Member 1">
+                        <h3>Nohiro Hazel Nayottama Rafid Hirmeison</h3>
+                        <h3>4332311011</h3>
+                    </div>
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/lifestyle-people-emotions-summer-leisure-concept-enthusiastic-handsome-happy-man-raising-hands-up-chanting-shouting-yes-as-winning-triumphing-lottery-prize-yellow-background_1258-59685.jpg?w=1060&t=st=1697368449~exp=1697369049~hmac=e180376c7ab38d695caf1eebafc21368acb55eacf6cadeb7717f40435f6e9b1f" alt="Member 2">
+                        <h3>Niel Rizky Sakti</h3>
+                        <h3>4332311009</h3>
+                    </div>
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/young-attractive-handsome-guy-feels-delighted-gladden-amazed_295783-535.jpg?w=1060&t=st=1697368378~exp=1697368978~hmac=261dc80eb0905de348b481a25ebcdfede7be206dc108d7ed2a9317ee69438650" alt="Member 3">
+                        <h3>Fizakel Ariandi</h3>
+                        <h3>4332311014</h3>
+                    </div>
+                </div>
+                <div class="about-us-row">
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/beauty-people-emotions-summer-leisure-vacation-concept-tender-beautiful-asian-girl-white-dress-pointing-finger-upper-left-corner-inviting-take-look-new-promo-offer-pink-background_1258-59482.jpg?w=1060&t=st=1697368286~exp=1697368886~hmac=f025ef582f2cea1424e7d755723992c5ad7b8a7982e42ad3df7446c721fc2fb5" alt="Member 4">
+                        <h3>Lenny Agustini</h3>
+                        <h3>4332311015</h3>
+                    </div>
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/waist-up-portrait-happy-excited-young-smiling-man-shouting-hooray-yes-raising-hands-up-fist-pump-joy-rejoicing-win-achieve-goal-celebrate-victory-success-white-wall_176420-37419.jpg?w=1060&t=st=1697368327~exp=1697368927~hmac=9244b677ed26aaa887a44f668df3d78e1bacdb83e6b273725973cd7dd4500070" alt="Member 5">
+                        <h3>Shoqidul Nur Ilham Pratama Putra</h3>
+                        <h3>4332311022</h3>
+                    </div>
+                    <div class="about-us-member">
+                        <img src="https://img.freepik.com/free-photo/smiling-happy-man-showing-ok-sign-looking-pleased-approving-something-good-standing-against-blue-background_1258-65053.jpg?w=1060&t=st=1697368443~exp=1697369043~hmac=193e197ed04a6c51c5b1ffbab5c29b4599d376b1f7194f0ebf7f8fefcb4c8829" alt="Member 6">
+                        <h3>Arthur Octriandra Yulio</h3>
+                        <h3>4332311028</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+       
+
+        function validateKey() {
+            var keyInput = document.getElementById('key');
+            var key = keyInput.value;
+    
+            var actionInput = document.querySelector('input[name="action"]:checked');
+            var action = actionInput ? actionInput.value : '';
+    
+            if ((action === 'encrypt' || action === 'decrypt') && (key === '' || isNaN(key))) {
+                alert('Please enter a valid key.');
+                return false;
+            }
+    
+            return true;
+        }
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            var generateKeyButton = document.getElementById('generate-key');
+            var keyInput = document.getElementById('key');
+            var cipherTextInput = document.getElementById('bruteforce-cipher-text');
+    
+            generateKeyButton.addEventListener('click', function () {
+                var randomKey = Math.floor(Math.random() * 25) + 1;
+                keyInput.value = randomKey;
+            });
+    
+            document.querySelector('form[action="/process"]').addEventListener('submit', function (event) {
+                var keyInput = document.getElementById('key');
+
+                if (keyInput.value === '') {
+                    keyInput.value = '0';
+                }
+            });
+
+            document.getElementById('download-button').addEventListener('click', function () {
+                var resultText = document.getElementById('result_text').value;
+
+                var dataUrl = 'data:text/plain;charset=utf-8,' + encodeURIComponent(resultText);
+                var downloadLink = document.createElement('a');
+                downloadLink.href = dataUrl;
+                downloadLink.download = 'result_text.txt';
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+        });
+
+        const backgroundImages = [
+        "url('{{ url_for('static', filename='poltek.jpg') }}')",
+        "url('{{ url_for('static', filename='tower a.jpg') }}')",
+        "url('{{ url_for('static', filename='techno.jpg') }}')",
+        ];
+
+        let currentIndex = 2;
+        function changeBackgroundImage() {
+            currentIndex = (currentIndex + 1) % backgroundImages.length;
+            document.body.style.backgroundImage = backgroundImages[currentIndex];
+        }
+
+        // Panggil fungsi pertama kali
+        changeBackgroundImage();
+
+        // Atur interval untuk mengganti gambar latar belakang setiap 30 detik)
+        setInterval(changeBackgroundImage, 30000);
+
+        
+    </script>
+</body>
+</html>

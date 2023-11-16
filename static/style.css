@@ -1,0 +1,357 @@
+*{
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Style for header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0F0F0F;
+    padding: 10px;
+}
+
+.logo {
+    flex: 1; /* Logo akan mengambil ruang yang tersedia */
+    max-width: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    color: #ffffff;
+    margin-left:80px;
+    margin-bottom: 10px;
+    font-weight:900;
+}
+
+/* Style for navigation menu */
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Style for navigation links */
+nav {
+    background: #0F0F0F;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1;
+    border: 1px solid #0F0F0F;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: center;
+    padding: 0px 16px 0px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color:rgb(90, 169, 255);
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight:500;
+    font-family: "Open sans";
+}
+
+h1, h2, h3, label, textarea, button {
+    color: white;
+    text-align: center;
+}
+
+textarea, input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #333;
+    resize: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00a300;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: "Open sans";
+}
+
+button:hover {
+    background-color: #008000;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 10px 0;
+}
+
+li {
+    margin: 5px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.download-link {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    color: #007bff;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Mengatur pembebasan baris */
+    justify-content: space-around;
+}
+
+.column {
+    width: 45%; /* Mengatur lebar kolom */
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #0F0F0F;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.column button {
+    width: 100%;
+}
+
+/* CSS untuk tombol Generate Key */
+button#generate-key {
+    margin-bottom: 0px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#generate-key:hover {
+    background-color: #0056b3;
+}
+
+/* Mengatur tombol "generate key" */
+button#generate-key {
+    margin-bottom: 15px;    
+}
+
+/* Mengatur elemen h1 dan h2 */
+h1, h2 {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: "Open sans";
+}
+
+h3 {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: "Open sans";
+    margin-top: 20px;
+}
+
+.column:first-child h2 {
+    margin-top: 0;
+}
+
+/* Mengatur elemen form */
+form {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1e1c1c; #jangan lupa ubah
+    box-shadow: 0 0 10px(0, 0, 0, 0.5);
+    font-family: "Open sans";}
+
+/* Mengatur label */
+label {
+    display: block;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 10px;
+    font-family: "Open sans";}
+
+/* Mengatur textarea dan input yang readonly */
+textarea[readonly], input[type="number"][readonly] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    resize: none;
+}
+
+/* Mengatur tombol */
+button {
+    padding: 10px 20px;
+    background-color: #00a300;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #008000;
+}
+
+/* Mengatur wadah utama untuk elemen input dan textarea pada Dekripsi */
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 0; /* Menghapus margin-top */
+}
+
+/* Mengatur tombol "generate key" */
+button#generate-key {
+    margin-bottom: 0px;
+    padding: 10px 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+button#generate-key:hover {
+    background-color: #0056b3;
+    border: 2px solid #0056b3;
+}
+
+/* Mengatur elemen key-input */
+.key-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    font-family: "Open sans";}
+
+.key-input label {
+    flex: 0 0 auto;
+}
+
+.key-input input {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+}
+
+key-input textarea#key {
+    width: 100%;
+    height: 200px; /* Sesuaikan tinggi sesuai kebutuhan */
+    font-size: 14px;
+}
+
+/* Mengatur elemen ul dan li */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    font-family: "Open sans";}
+
+li {
+    margin: 5px 0;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "Open sans";}
+
+/* Mengatur elemen download-link */
+.download-link {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    color: #007bff;
+}
+
+ul li {
+    color: #fff; /* Mengatur warna teks menjadi putih */
+}
+
+.content {
+    padding-top: 50px; /* Adjust the value as needed */
+}
+
+.about-us {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-us h2 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.about-us-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.about-us-member {
+    width: calc(33.33% - 20px);
+    text-align: center;
+    margin: 10px;
+}
+
+.about-us-member img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.about-us-member h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
