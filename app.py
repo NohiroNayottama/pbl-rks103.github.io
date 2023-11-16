@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = secret_key
 
 # Set the static folder
-app.static_folder = 'C:\\Users\\AU\\Desktop\\caesar\\static'
+app.static_folder = '{{ url_for('static', filename='style.css') }}'
 
 # Fungsi Caesar Cipher
 def caesar_cipher(text, key):
