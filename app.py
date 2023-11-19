@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, send_file, session
 import os
 import random
+from flask
 
+caesar_cipher_bp = Blueprint('caesar_cipher', __name__)
 secret_key = os.urandom(24)
 
 app = Flask(__name__)
@@ -51,21 +53,21 @@ def process():
     return render_template('index.html', text=text, key=request.form.get('key', ''), result_text=result_text, brute_force_results={})
 
 
-@app.route('/encrypt', methods=['POST'])
+@caesar_cipher_bp.route('/encrypt', methods=['POST'])
 def encrypt():
     plain_text = request.form['text']
     key = int(request.form['key'])
     cipher_text = caesar_cipher(plain_text, key)
     return render_template('index.html', text=plain_text, key=key, result_text=cipher_text, action='encrypt')
 
-@app.route('/decrypt', methods=['POST'])
+@caesar_cipher_bp.route('/decrypt', methods=['POST'])
 def decrypt():
     cipher_text = request.form['text']
     key = int(request.form['key'])
     plain_text = caesar_cipher(cipher_text, -key)
     return render_template('index.html', text=cipher_text, key=key, result_text=plain_text, action='decrypt')
 
-@app.route('/bruteforce', methods=['POST'])
+@caesar_cipher_bp.route('/bruteforce', methods=['POST'])
 def bruteforce():
     cipher_text = request.form['cipher_text']
     brute_force_results = {}
@@ -73,6 +75,8 @@ def bruteforce():
         result = caesar_cipher(cipher_text, -key)
         brute_force_results[key] = result
     return render_template('index.html', brute_force_results=brute_force_results, cipher_text=cipher_text)
+
+app.register_blueprint(caesar_cipher_bp, url_prefix='/caesar')
 
 if __name__ == '__main__':
     app.run(debug=True)
