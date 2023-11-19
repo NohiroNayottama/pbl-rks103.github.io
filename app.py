@@ -32,17 +32,21 @@ def process():
 
     if 'action' in request.form:
         action = request.form['action']
-        if action == 'upload':
-            uploaded_file = request.files['uploaded_file']
-            if uploaded_file:
-                uploaded_text = uploaded_file.read().decode('utf-8')
-                text = uploaded_text
-        elif action == 'encrypt':
-            key = int(request.form['key'])
-            result_text = caesar_cipher(text, key)
-        elif action == 'decrypt':
-            key = int(request.form.get('key', 0))
-            result_text = caesar_cipher(text, -key)
+        try:
+            if action == 'upload':
+                uploaded_file = request.files['uploaded_file']
+                if uploaded_file:
+                    uploaded_text = uploaded_file.read().decode('utf-8')
+                    text = uploaded_text
+            elif action == 'encrypt':
+                key = int(request.form['key'])
+                result_text = caesar_cipher(text, key)
+            elif action == 'decrypt':
+                key = int(request.form.get('key', 0))
+                result_text = caesar_cipher(text, -key)
+        except Exception as e:
+            # Handle specific exceptions (e.g., FileNotFoundError, ValueError) here
+            return render_template('error.html', error=str(e))  # Render an error page with the specific error message
 
     return render_template('index.html', text=text, key=request.form.get('key', ''), result_text=result_text, brute_force_results={})
 
