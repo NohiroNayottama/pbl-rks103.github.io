@@ -141,26 +141,7 @@
     </div>
     
     <script>
-               // Add this function to validate file type before submitting the form
-        function validateFile() {
-            var fileInput = document.querySelector('input[type="file"]');
-            var file = fileInput.files[0];
-            var allowedTypes = ['text/plain']; // Add more allowed types if needed
-        
-            if (file && !allowedTypes.includes(file.type)) {
-                alert('Invalid file type. Please upload a .txt file.');
-                return false;
-            }
-        
-            // Add a file size check if necessary
-            // Example: if (file.size > 5242880) { alert('File size exceeds 5MB.'); return false; }
-        
-            return true;
-        }
-        
-        // In your form tag, add this onsubmit attribute:
-        // <form method="POST" action="/process" enctype="multipart/form-data" onsubmit="return validateFile()"></form>
-
+       
 
         function validateKey() {
             var keyInput = document.getElementById('key');
